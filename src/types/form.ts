@@ -1,13 +1,6 @@
 export interface FormData {
-  monthsOfRentalHistory: any;
-  rehabAmountCompleted: string;
-  constructionAmountCompleted: string;
-  reasonForBridge: string;
-  planToRepay: string;
-  tearDown: boolean;
-  scopeOfWork: string;
-  planOnCompletion: string;
-  vacant: boolean;
+  // Loan Introduction
+
   // Deal Introduction
   propertyAddress: string;
   loanProduct: string;
@@ -37,21 +30,9 @@ export interface FormData {
   HOAFees?: number;
   propertyValue?: number;
   loanAmount?: number;
-  underContract?: boolean;
-  closingDate?: string;
-  additionalDetail?: string;
   NOI?: number;
   requestedLTV?: number;
   maxLTV?: number;
-  currentUse?: string;
-
-  // Additional fields for Loan Details Section 1
-  originalPurchasePrice?: string;
-  originalPurchaseDate?: string;
-  rehabAmount?: string;
-  mortgagePayoff?: string;
-  mortgagePayoffDate?: string;
-  currentlyVacant?: boolean;
 
   // Broker Information
   brokerFirstName?: string;
@@ -69,35 +50,41 @@ export interface FormData {
   borrowerEmail?: string;
   borrowerPhoneNumber?: string;
 
-  // Additional fields for Section 2
+  // Additional fields loan data field
+  monthsOfRentalHistory: any;
+  rehabAmountCompleted: string;
+  constructionAmountCompleted: string;
+  reasonForBridge: string;
+  planToRepay: string;
+  tearDown: boolean;
+  scopeOfWork: string;
+  planOnCompletion: string;
+  vacant: boolean;
+  underContract?: boolean;
+  currentUse?: string;
+  closingDate?: string;
+  additionalDetail?: string;
+  originalPurchasePrice?: string;
+  originalPurchaseDate?: string;
+  rehabAmount?: string;
+  mortgagePayoff?: string;
+  mortgagePayoffDate?: string;
+  currentlyVacant?: boolean;
   totalSTRs?: number;
   sameMarketSTRs?: number;
-
-  // Additional fields for Section 4
   projectsCompleted?: number;
   licensesHeld?: string;
-
-  // Additional fields for Loan Details Section 4
   rehabCost?: number;
   borrowerARV?: number;
   totalCostBasis?: number;
   marginOnImprovement?: number;
   requestedLTC?: number;
-
-  // Additional fields for Loan Details Section 5
   requestedLTAIV?: number;
   maxLTAIV?: number;
-
-  // Additional fields for Loan Details Section 6
   constructionBudget?: number;
-
-  // Additional fields for Loan Details Section 7
   requestedLTARV?: number;
   maxLTARV?: number;
-
-  // Additional fields for Section 8
   netWorth?: number;
-
   comparable1?: string;
   comparable2?: string;
   comparable3?: string;

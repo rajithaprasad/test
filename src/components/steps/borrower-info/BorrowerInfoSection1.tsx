@@ -20,48 +20,63 @@ const BorrowerInfoSection1 = ({
 }: BorrowerInfoSection0Props) => {
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(
-        "http://localhost/loan_app/newquote/broker/end_point.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const result = await response.text();
-      console.log(result);
-
-      // Show success alert
-      Swal.fire({
-        title: "Success!",
-        text: "Your application has been submitted successfully.",
-        icon: "success",
-        confirmButtonText: "OK",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/"); // Navigate after clicking OK
-        }
-      });
-    } catch (error) {
-      console.error("Error:", error);
-      Swal.fire({
-        title: "Error!",
-        text: "There was an error submitting your application.",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
-    }
-  };
+  const handleSubmit = async (e) => {
+     e.preventDefault();
+ 
+     // Show loading alert
+     Swal.fire({
+       title: "Submitting...",
+       text: "Please wait while we submit your application.",
+       allowOutsideClick: false,
+       didOpen: () => {
+         Swal.showLoading();
+       },
+     });
+ 
+     try {
+       const response = await fetch(
+         "https://deeppink-giraffe-799003.hostingersite.com/backend/end_point.php",
+         {
+           method: "POST",
+           headers: {
+             "Content-Type": "application/json",
+           },
+           body: JSON.stringify(formData),
+         }
+       );
+ 
+       if (!response.ok) {
+         throw new Error("Network response was not ok");
+       }
+ 
+       const result = await response.text();
+       console.log(result);
+ 
+       // Close loading alert and show success alert
+       Swal.close();
+       Swal.fire({
+         title: "Success!",
+         text: "Your application has been submitted successfully.",
+         icon: "success",
+         confirmButtonText: "OK",
+       }).then((result) => {
+         if (result.isConfirmed) {
+           navigate("/"); // Navigate after clicking OK
+         }
+       });
+     } catch (error) {
+       console.error("Error:", error);
+ 
+       // Close loading alert and show error alert
+       Swal.close();
+       Swal.fire({
+         title: "Error!",
+         text: "There was an error submitting your application.",
+         icon: "error",
+         confirmButtonText: "OK",
+       });
+     }
+   };
 
   const handleHomeClick = () => {
     localStorage.removeItem("userType");
@@ -83,7 +98,9 @@ const BorrowerInfoSection1 = ({
       </div>
 
       <div className="bg-blue-50 rounded-xl p-6 border border-blue-100">
-        <h3 className="text-xl font-semibold text-blue-800 mb-6">Borrower Details - Section 0</h3>
+        <h3 className="text-xl font-semibold text-blue-800 mb-6">
+          Borrower Details - Section 0
+        </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="relative">
@@ -94,13 +111,18 @@ const BorrowerInfoSection1 = ({
               <input
                 type="text"
                 id="borrowerFirstName"
-                value={formData.borrowerFirstName || ''}
-                onChange={(e) => updateFormData({ borrowerFirstName: e.target.value })}
+                value={formData.borrowerFirstName || ""}
+                onChange={(e) =>
+                  updateFormData({ borrowerFirstName: e.target.value })
+                }
                 className="w-full p-4 border-2 border-gray-200 rounded-xl bg-white/50 backdrop-blur-sm focus:border-emerald-500 focus:bg-white focus:outline-none transition-all duration-300 text-lg"
                 placeholder=" "
                 required
               />
-              <label htmlFor="borrowerFirstName" className="absolute left-4 top-4 text-gray-500 transition-all duration-300 pointer-events-none bg-white px-1 -mt-2 text-sm">
+              <label
+                htmlFor="borrowerFirstName"
+                className="absolute left-4 top-4 text-gray-500 transition-all duration-300 pointer-events-none bg-white px-1 -mt-2 text-sm"
+              >
                 First Name *
               </label>
             </div>
@@ -114,13 +136,18 @@ const BorrowerInfoSection1 = ({
               <input
                 type="text"
                 id="borrowerLastName"
-                value={formData.borrowerLastName || ''}
-                onChange={(e) => updateFormData({ borrowerLastName: e.target.value })}
+                value={formData.borrowerLastName || ""}
+                onChange={(e) =>
+                  updateFormData({ borrowerLastName: e.target.value })
+                }
                 className="w-full p-4 border-2 border-gray-200 rounded-xl bg-white/50 backdrop-blur-sm focus:border-emerald-500 focus:bg-white focus:outline-none transition-all duration-300 text-lg"
                 placeholder=" "
                 required
               />
-              <label htmlFor="borrowerLastName" className="absolute left-4 top-4 text-gray-500 transition-all duration-300 pointer-events-none bg-white px-1 -mt-2 text-sm">
+              <label
+                htmlFor="borrowerLastName"
+                className="absolute left-4 top-4 text-gray-500 transition-all duration-300 pointer-events-none bg-white px-1 -mt-2 text-sm"
+              >
                 Last Name *
               </label>
             </div>
@@ -134,13 +161,18 @@ const BorrowerInfoSection1 = ({
               <input
                 type="email"
                 id="borrowerEmail"
-                value={formData.borrowerEmail || ''}
-                onChange={(e) => updateFormData({ borrowerEmail: e.target.value })}
+                value={formData.borrowerEmail || ""}
+                onChange={(e) =>
+                  updateFormData({ borrowerEmail: e.target.value })
+                }
                 className="w-full p-4 border-2 border-gray-200 rounded-xl bg-white/50 backdrop-blur-sm focus:border-emerald-500 focus:bg-white focus:outline-none transition-all duration-300 text-lg"
                 placeholder=" "
                 required
               />
-              <label htmlFor="borrowerEmail" className="absolute left-4 top-4 text-gray-500 transition-all duration-300 pointer-events-none bg-white px-1 -mt-2 text-sm">
+              <label
+                htmlFor="borrowerEmail"
+                className="absolute left-4 top-4 text-gray-500 transition-all duration-300 pointer-events-none bg-white px-1 -mt-2 text-sm"
+              >
                 Email Address *
               </label>
             </div>
@@ -154,13 +186,18 @@ const BorrowerInfoSection1 = ({
               <input
                 type="tel"
                 id="borrowerPhoneNumber"
-                value={formData.borrowerPhoneNumber || ''}
-                onChange={(e) => updateFormData({ borrowerPhoneNumber: e.target.value })}
+                value={formData.borrowerPhoneNumber || ""}
+                onChange={(e) =>
+                  updateFormData({ borrowerPhoneNumber: e.target.value })
+                }
                 className="w-full p-4 border-2 border-gray-200 rounded-xl bg-white/50 backdrop-blur-sm focus:border-emerald-500 focus:bg-white focus:outline-none transition-all duration-300 text-lg"
                 placeholder=" "
                 required
               />
-              <label htmlFor="borrowerPhoneNumber" className="absolute left-4 top-4 text-gray-500 transition-all duration-300 pointer-events-none bg-white px-1 -mt-2 text-sm">
+              <label
+                htmlFor="borrowerPhoneNumber"
+                className="absolute left-4 top-4 text-gray-500 transition-all duration-300 pointer-events-none bg-white px-1 -mt-2 text-sm"
+              >
                 Phone Number *
               </label>
             </div>

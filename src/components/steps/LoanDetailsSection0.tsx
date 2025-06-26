@@ -74,8 +74,8 @@ const LoanDetailsSection0 = ({ formData, updateFormData, onNext, onPrevious }: L
             <input
               type="number"
               id="hoaFees"
-              value={formData.hoaFees || ''}
-              onChange={(e) => updateFormData({ hoaFees: parseInt(e.target.value) || 0 })}
+              value={formData.HOAFees || ''}
+              onChange={(e) => updateFormData({ HOAFees: parseInt(e.target.value) || 0 })}
               placeholder=" "
               className="w-full p-4 border-2 border-gray-200 rounded-xl bg-white/50 backdrop-blur-sm focus:border-emerald-500 focus:bg-white focus:outline-none transition-all duration-300 text-lg"
             />
